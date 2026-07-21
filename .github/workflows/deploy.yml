@@ -1,0 +1,65 @@
+name: DevSecOps Super Mario Pipeline
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  security-and-infrastructure:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Run Trivy Vulnerability Scanner
+        uses: aquasecurity/trivy-action@v0.35.0
+        with:
+          image-ref: 'pengbai/docker-supermario:latest'
+          format: 'table'
+          exit-code: '1'
+          ignore-unfixed: true
+          severity: 'CRITICAL,HIGH'
+
+     
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: arn:aws:iam::823729324830:role/GitHubActions-DevSecOps-Role
+          aws-region: us-east-1
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: "1.8.0"
+
+      - name: Terraform Init
+        working-directory: ./EKS-TF
+        run: terraform init
+
+      - name: Terraform Plan
+        working-directory: ./EKS-TF
+        run: terraform plan
+
+      - name: Terraform Apply
+        working-directory: ./EKS-TF
+        run: terraform apply -auto-approve
+
+
+      - name: Update KubeConfig
+        run: |
+          aws eks update-kubeconfig --name  mario-devsecops-cluster --region us-east-1
+
+      - name: Deploy Game to EKS
+        run: |
+          kubectl apply -f ./k8s/deployment.yaml
+          kubectl apply -f ./k8s/service.yaml
