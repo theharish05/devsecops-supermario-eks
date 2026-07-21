@@ -1,5 +1,5 @@
 ##  Architecture Overview
-![Description]([https://drive.google.com/file/d/1tX3D8Pr2iInhQBuiv6oH1KHqr0CwWoRJ/view?usp=sharing](https://drive.google.com/file/d/1tX3D8Pr2iInhQBuiv6oH1KHqr0CwWoRJ/view?usp=sharing))
+![DevSecOps Architecture](https://lh3.googleusercontent.com/d/1tX3D8Pr2iInhQBuiv6oH1KHqr0CwWoRJ)
 ```
 
                                     [Developer] ──(git push)──> [GitHub Repository]
