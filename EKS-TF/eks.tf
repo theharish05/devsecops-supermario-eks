@@ -27,3 +27,19 @@ module "eks" {
     Project     = "mario-v2"
   }
 }
+
+resource "aws_eks_access_entry" "github_access" {
+  cluster_name      = module.eks.cluster_name
+  principal_arn     = "arn:aws:iam::823729324830:root"
+  type              = "STANDARD"
+}
+
+resource "aws_eks_access_policy_association" "cluster_admin" {
+  cluster_name  = module.eks.cluster_name
+  policy_arn    = "arn:aws:eks::aws:cluster-access-policy/AmazonEKSClusterAdminPolicy"
+  principal_arn = aws_eks_access_entry.github_access.principal_arn
+
+  access_scope {
+    type = "cluster"
+  }
+}
