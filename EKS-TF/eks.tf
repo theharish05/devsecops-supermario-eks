@@ -26,6 +26,8 @@ module "eks" {
     Environment = "production"
     Project     = "mario-v2"
   }
+}
+
 resource "aws_eks_access_entry" "github_deployer_access" {
   cluster_name      = module.eks.cluster_name
   principal_arn     = "arn:aws:iam::823729324830:user/GitHubDeployer"
