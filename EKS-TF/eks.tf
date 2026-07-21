@@ -40,4 +40,4 @@ resource "aws_eks_access_policy_association" "github_deployer_admin" {
   access_scope {
     type = "cluster"
   }
-}}
+}
