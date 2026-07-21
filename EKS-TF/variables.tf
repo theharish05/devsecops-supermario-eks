@@ -1,17 +1,11 @@
-variable "aws_region" {
-  description = "AWS region for the EKS cluster"
-  type        = string
-  default     = "us-east-1" 
-}
-
 variable "cluster_name" {
-  description = "Name of the EKS cluster"
+  description = "The name of the EKS cluster"
   type        = string
-  default     = "mario-devsecops-cluster"
+  default     = "mario-v2-cluster"
 }
 
-variable "node_instance_type" {
-  description = "EC2 instance type for EKS worker nodes"
+variable "ecr_repo_name" {
+  description = "The name of the ECR repository"
   type        = string
-  default     = "t3.small" 
+  default     = "mario-v2-app-repo"
 }
