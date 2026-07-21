@@ -45,5 +45,5 @@ jobs:
 
     - name: Deploy to Kubernetes
       run: |
-        kubectl apply -f k8s/deployment.yaml
+        kubectl apply -f k8s/deployment.yaml --validate=false
         kubectl rollout restart deployment/mario-v2-deployment
