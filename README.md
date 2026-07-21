@@ -1,34 +1,6 @@
 ##  Architecture Overview
-![DevSecOps Architecture](https://lh3.googleusercontent.com/d/1tX3D8Pr2iInhQBuiv6oH1KHqr0CwWoRJ)
 ```
-
-                                    [Developer] ──(git push)──> [GitHub Repository]
-                                                      │
-                                          (triggers CI/CD workflow)
-                                                      ▼
-                                            [GitHub Actions Runner]
-                                                      ├── 1. Configure AWS Credentials
-                                                      ├── 2. Docker Pull & Tag Image
-                                                      ├── 3. Trivy Security Scan (Vulnerability Gate)
-                                                      ├── 4. Push Image to Amazon ECR
-                                                      └── 5. Deploy to Amazon EKS via kubectl
-                                                      │
-                                                      ▼
-                                              [AWS Cloud (VPC)]
-                                            ┌──────────────────────┐
-                                            │  ┌────────────────┐  │
-                                            │  │   Amazon EKS   │  │
-                                            │  │ ┌────────────┐ │  │
-                                            │  │ │    Pods    │ │  │
-                                            │  │ └────────────┘ │  │
-                                            │  └───────┬────────┘  │
-                                            └──────────┼───────────┘
-                                                       ▼
-                                              [AWS Load Balancer]
-                                                       │
-                                                    (HTTP/80)
-                                                       ▼
-                                                  [End Users]
+![DevSecOps Architecture](https://lh3.googleusercontent.com/d/1tX3D8Pr2iInhQBuiv6oH1KHqr0CwWoRJ)
 
 ```
 
