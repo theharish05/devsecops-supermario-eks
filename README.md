@@ -1,8 +1,5 @@
 ##  Architecture Overview
-```
 ![DevSecOps Architecture](https://lh3.googleusercontent.com/d/1tX3D8Pr2iInhQBuiv6oH1KHqr0CwWoRJ)
-
-```
 
 ---
 
